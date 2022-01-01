@@ -18,7 +18,7 @@ A two-dimensional heat conduction model with phase change is used to simulate th
 # How to Run
 2D-permafrost-model is wrotten by Matlab and public open. To run the software, please
 
-(1) Get model code at https://github.com/s898657703/2D-permafrost-model/edit/main/README.mdhttps://github.com/geocryology/REDCAPP
+(1) Get model code at https://github.com/s898657703/2D-permafrost-model.git
 
 (2) Run the script
 
