@@ -10,8 +10,8 @@ c_water    = 4.2;
 c_ice      = 1.94;
 c_air      = 1.01;
 [n,m]      = size(T_T);
-T_phase    = 1;% phase change range
-Tf         = -0.01;%frzeeing point
+T_phase    = 1;
+Tf         = -0.01;
 %%
 for i = 1:n
     for j = 1:m

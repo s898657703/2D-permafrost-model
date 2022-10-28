@@ -36,16 +36,13 @@ for i = 1 :row_n
     
 end
 para3(NY,:) = para3(NY-1,:);
-%%      定义冻融日期
-cy1 =se(:,1);%读取参数值对应的深度
+
+cy1 =se(:,1);
 se_1(:,1)=ipy;
 for i = 2:3
     se_1(:,i)=interp1(cy1,se(:,i),ipy,'Linear');
 end
 se_1=round(se_1);
-
-
-%%  含水量
 ab_f_1=para1(:,6:7);
 ab_t_1=para1(:,8:9);
 

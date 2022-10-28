@@ -15,24 +15,19 @@ for ii=n2+1:NX
     GST1(1,ii) =  GST_day(1,3);
 end
 
-
-
-% upper boundary
 NODE_up(:,2)=GST1';
 for i = 1:NX
     NODE_up(i,1) = (NY-1)*NX+i;
 end
-% lower boundary
+
 for i = 1:NX-2
     Q2(2*i,1) = -heat_flux*TIME_s;
 end
 Q2(2*(NX-1)-1,1) = -heat_flux*TIME_s;
-% left boundary
 for i = 1:NY-1
 
     Q2(1+(i-1)*2*(NX-1)) =0;
 end
-% right boundary
 for i = 1:NY-1
     Q2(2*(NX-1)*i) = 0;
 end

@@ -1,10 +1,9 @@
 function [TTT]=FGAUSSIAN(NUM_node,NNN,NN,TSS,TPP,TKK)
-%MULTI针对系数矩阵N,判断矩阵系数是否为0，是否要执行消去运算140页
-       %GAUSSIAN  METHOD高斯迭代法124页
-        for m = 1:NUM_node%m20--II
+
+        for m = 1:NUM_node
             TPP(m) = TPP(m)/TKK(NN(m));
             if (m~=NUM_node)
-                for n = m+1:NUM_node%m21--JJ
+                for n = m+1:NUM_node
                     II7 = n;
                     II8 = m;
                     
@@ -16,7 +15,7 @@ function [TTT]=FGAUSSIAN(NUM_node,NNN,NN,TSS,TPP,TKK)
                     if (TSS(n)~=0)
                         IAO = NN(n)-n+m;
                         TSS(n) = TKK(IAO)/TKK(NN(m));
-                        for m22 = IAO+1:NN(n)%m22--IO
+                        for m22 = IAO+1:NN(n)
                             TKK(m22) = TKK(m22)-TKK(IAO)*TSS(m+m22-IAO);
                         end
                         TPP(n) = TPP(n)-TKK(IAO)*TPP(m);
@@ -27,8 +26,8 @@ function [TTT]=FGAUSSIAN(NUM_node,NNN,NN,TSS,TPP,TKK)
             TKK(NN(m)) = 1;
         end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        for m = NUM_node-1:-1:1%m23--II
-            for n = m+1:NUM_node%m24--JJ
+        for m = NUM_node-1:-1:1
+            for n = m+1:NUM_node
                 II7=n;
                 II8=m;
                 

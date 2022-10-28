@@ -13,61 +13,33 @@ datapath = 'data\';
 outpath  = 'out\';
 %%  import soil parameter
 load([datapath,'PARA.mat'])
-%para_1, para_2, para_3 is three boreholes soil parameter 
-% column 1:depth of layer top(unit:m)
-% column 2:depth of layer bottom(unit:m)
-% column 3:soil particle content (unit:m3/m3)
-% column 4:water content (unit:m3/m3)
-% column 5:air content (unit:m3/m3)
-% column 6:fitting constant 'a' of unfrozen water in freezing state
-% column 7:fitting constant 'b' of unfrozen water in freezing state
-% column 8:fitting constant 'a' of unfrozen water in thawing state
-% column 9:fitting constant 'b' of unfrozen water in thawing state
-% se is freezing and thawing time
-% column 1:depth of layer (unit:m)
-% column 2:time of thawing(unit:m)
-% column 3:time of freezing(unit:m)
 
 %%  import observed soil temperature
 load([datapath,'T_ini.mat'])
-% T_1, T_2, T_3 is the soil temperature observed in three boreholes
-% column 1:depth of layer(unit:m)
-% column 2:soil temperature(unit:℃)
+
 %%  import forcing data (GST)
 load([datapath,'GST.mat'])
-% GST_data is ground surface temperature
-% column 1:date
-% column 2-4:ground surface temperature at S1, S2, S3 site(unit:℃)
-RDATE  = datestr(GST_data.date); % date
-GST  = [GST_data.S1 GST_data.S2 GST_data.S3]; % ground surface temperature for three boreholes
+RDATE  = datestr(GST_data.date); 
+GST  = [GST_data.S1 GST_data.S2 GST_data.S3]; 
 %%  define input parameters
-%                 left  right  dx
 Mesh.ipx = [ 0    93.5   0.50];   
-% column 1:distance of column left(unit:m)
-% column 2:distance of column right(unit:m)
-% column 3:horizontal mesh size between the layers(unit:m)
-
-%                 top   bot  dy
 Mesh.ipy = [ 0.1   2    0.10;...   
                   2     20   0.25;...   
                   20    30   0.5 ;...    
                   30    40   1   ; ...
                   40    60   2   ;...
                   60    100  5   ];   
-% column 1:depth of layer top(unit:m)
-% column 2:depth of layer bottom(unit:m)
-% column 3:vertical mesh size between the layers(unit:m)
 %%
-begDate       = datetime(2015,10,21);  % start date for run
-endDate       = datetime(2021,12,13); % end date for run
+begDate       = datetime(2015,10,21); 
+endDate       = datetime(2021,12,13); 
 year_start    = 2015;
 year_end      = 2021;
-heat_flux     = 0.06;%Geothermal heat flux at the bottom
-wide_left     = 22;%middle position between left two boreholes(unit:m) 
-wide_right    = 70;%middle position between right two boreholes(unit:m) 
-time_interval = 1;% interval [days] in which output files are written
+heat_flux     = 0.06;
+wide_left     = 22;
+wide_right    = 70;
+time_interval = 1;
 TIME_s        = 3600.0 * 24 * time_interval;
-NTB           = strmatch(datestr(begDate), RDATE); % forcing index of begDate
+NTB           = strmatch(datestr(begDate), RDATE); 
 %%  Discretization
 % Generate mesh
 [ipx,ipy] = FMESH(Mesh);
@@ -118,7 +90,7 @@ for year_run = year_start:year_end
             if (day_run>se_1(ssee,2)&&day_run<se_1(ssee,3))
                 ab_a(ssee,:) = A_t(ssee,:);
                 ab_b(ssee,:) = B_t(ssee,:);
-            else%freezing
+            else
                 ab_a(ssee,:) = A_f(ssee,:);
                 ab_b(ssee,:) = B_f(ssee,:);
             end
